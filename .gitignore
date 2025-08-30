@@ -1,0 +1,35 @@
+# Ignore .env file
+.env
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore log files
+*.log
+courseenv/
+
+# Ignore SQLite database file
+db.sqlite3
+
+# Ignore static files directory
+staticfiles/
+
+# Ignore media files directory
+media/
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore other miscellaneous files
+*.tmp
+*.bak
+*.swp
