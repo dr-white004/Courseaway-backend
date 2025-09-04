@@ -16,11 +16,14 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         }
     
     def validate(self, data):
-        # Check if trying to register as admin
-        if data.get('role') == 'admin' or 'admin_secret' in data:
-            # Verify admin secret code
+        # Check if admin secret is provided and correct
+        admin_secret = data.get('admin_secret')
+        if admin_secret:
             from django.conf import settings
-            if data.get('admin_secret') != settings.ADMIN_REGISTRATION_SECRET:
+            if admin_secret == settings.ADMIN_REGISTRATION_SECRET:
+                # Secret is correct - mark this as an admin registration
+                data['is_admin'] = True
+            else:
                 raise serializers.ValidationError(
                     {'admin_secret': 'Invalid admin registration secret code'}
                 )
@@ -28,12 +31,14 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return data
     
     def create(self, validated_data):
+        # Check if this is an admin registration
+        is_admin = validated_data.pop('is_admin', False)
+        
         # Remove admin_secret from validated_data before creating user
         validated_data.pop('admin_secret', None)
         
-        # Default role is student, can be overridden by admin secret
-        if 'role' not in validated_data:
-            validated_data['role'] = 'student'
+        # Set role based on whether admin secret was provided and correct
+        validated_data['role'] = 'admin' if is_admin else 'student'
         
         user = User.objects.create_user(
             email=validated_data['email'],
