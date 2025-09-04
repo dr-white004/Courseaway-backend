@@ -180,5 +180,4 @@ SWAGGER_SETTINGS = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 # For file uploads
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 MAX_UPLOAD_SIZE = 10485760  # 10MB
