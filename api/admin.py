@@ -28,7 +28,12 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ('title', 'instructor', 'start_date', 'end_date', 'is_active')
     list_filter = ('is_active', 'start_date', 'end_date')
     search_fields = ('title', 'description')
-    raw_id_fields = ('instructor',)
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        # Filter the instructor field to only show admin users
+        if db_field.name == "instructor":
+            kwargs["queryset"] = User.objects.filter(role='admin')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
