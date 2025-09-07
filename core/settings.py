@@ -2,10 +2,12 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+import cloudinary_storage
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='your-secret-key-here-change-in-production')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-!9%f0$7#j8v6p2@xw4l)6kjz!f+5a$%g5jv#c3n^r+q1z')
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
@@ -124,13 +126,14 @@ if DEBUG:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     # Production - use Cloudinary
+
     CLOUDINARY_STORAGE = {
-        'CLOUDINARY_CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your-cloud-name'),
-        'CLOUDINARY_API_KEY': config('CLOUDINARY_API_KEY', default='xyz'),
-        'CLOUDINARY_API_SECRET': config('CLOUDINARY_API_SECRET', default='your-api-secret'),
+        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your-cloud-name'),
+        'API_KEY': config('CLOUDINARY_API_KEY', default='xyz'),
+        'API_SECRET': config('CLOUDINARY_API_SECRET', default='your-api-secret'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    MEDIA_URL = '/media/'  # This can remain the same
+    MEDIA_URL = '/media/'  
 
 
 
