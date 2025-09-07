@@ -125,9 +125,9 @@ if DEBUG:
 else:
     # Production - use Cloudinary
     CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your-cloud-name'),
-        'API_KEY': config('CLOUDINARY_API_KEY', default='xyz'),  # Your API key
-        'API_SECRET': config('CLOUDINARY_API_SECRET', default='your-api-secret'),
+        'CLOUDINARY_CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='your-cloud-name'),
+        'CLOUDINARY_API_KEY': config('CLOUDINARY_API_KEY', default='xyz'),
+        'CLOUDINARY_API_SECRET': config('CLOUDINARY_API_SECRET', default='your-api-secret'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     MEDIA_URL = '/media/'  # This can remain the same
