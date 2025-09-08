@@ -20,13 +20,14 @@ ADMIN_REGISTRATION_SECRET = config('ADMIN_REGISTRATION_SECRET', default='my-admi
 INSTALLED_APPS = [
     
     'cloudinary_storage',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
    
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    
     
 
     # Third party apps
@@ -137,6 +138,7 @@ else:
         'API_SECRET': config('CLOUDINARY_API_SECRET', default='VsAJ5iXyRTGPy9mBWmiEyo8Nmvc'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    MEDIA_URL = '/media/'
 
 
 
