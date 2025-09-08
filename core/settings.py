@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['*']
 ADMIN_REGISTRATION_SECRET = config('ADMIN_REGISTRATION_SECRET', default='my-admin-secret-12345')
 
 INSTALLED_APPS = [
-    'cloudinary_storage', 
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third party apps
+    'cloudinary_storage', 
     'rest_framework',
     'corsheaders',
     'django_filters',
