@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.core.validators import MinValueValidator, MaxValueValidator
+from cloudinary.models import CloudinaryField
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -61,7 +62,8 @@ class Course(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     is_active = models.BooleanField(default=True)
-    thumbnail = models.ImageField(upload_to='course_thumbnails/', null=True, blank=True)
+    thumbnail = CloudinaryField('image',folder='course_thumbnails/', null=True, blank=True)
+  
     
     def __str__(self):
         return self.title
@@ -105,7 +107,7 @@ class CourseContent(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='contents')
     title = models.CharField(max_length=200)
     content_type = models.CharField(max_length=10, choices=CONTENT_TYPES)
-    content_file = models.FileField(upload_to='course_contents/')
+    content_file = CloudinaryField( resource_type='raw',  folder='course_contents',blank=True, null=True )
     description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)

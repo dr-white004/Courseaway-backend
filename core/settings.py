@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-!9%f0$7#j8v6p2@xw4l)6kjz!f+5a$%g5jv#c3n^r+q1z')
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Allow all hosts for training purposes
 ALLOWED_HOSTS = ['*']
@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ['*']
 ADMIN_REGISTRATION_SECRET = config('ADMIN_REGISTRATION_SECRET', default='my-admin-secret-12345')
 
 INSTALLED_APPS = [
+    'cloudinary_storage', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,7 +32,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'cloudinary',
-    'cloudinary_storage', 
+    
     'whitenoise.runserver_nostatic',
     # Local apps
     'api',
@@ -126,14 +127,12 @@ if DEBUG:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     # Production - use Cloudinary
-
     CLOUDINARY_STORAGE = {
-        'CLOUDINARY_CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='dlev4b4pu'),
-        'CLOUDINARY_API_KEY': config('CLOUDINARY_API_KEY', default='627197823432284'),
-        'CLOUDINARY_API_SECRET': config('CLOUDINARY_API_SECRET', default='VsAJ5iXyRTGPy9mBWmiEyo8Nmvc'),
+        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='dlev4b4pu'),
+        'API_KEY': config('CLOUDINARY_API_KEY', default='627197823432284'),
+        'API_SECRET': config('CLOUDINARY_API_SECRET', default='VsAJ5iXyRTGPy9mBWmiEyo8Nmvc'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    MEDIA_URL = '/media/'  
 
 
 
@@ -162,10 +161,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-# ]
+
 
 # Swagger settings
 SWAGGER_SETTINGS = {
