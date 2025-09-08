@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-!9%f0$7#j8v6p2@xw4l)6kjz!f+5a$%g5jv#c3n^r+q1z')
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Allow all hosts for training purposes
 ALLOWED_HOSTS = ['*']
@@ -19,14 +19,15 @@ ADMIN_REGISTRATION_SECRET = config('ADMIN_REGISTRATION_SECRET', default='my-admi
 
 INSTALLED_APPS = [
     
-    'cloudinary_storage',
+    
     'django.contrib.admin',
+    'django.contrib.staticfiles',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
    
-    'django.contrib.staticfiles',
+    'cloudinary',
     
     
 
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'drf_yasg',
-    'cloudinary',
+    
     
     'whitenoise.runserver_nostatic',
     # Local apps
